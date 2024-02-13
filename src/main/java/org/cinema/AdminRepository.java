@@ -13,25 +13,27 @@ public class AdminRepository {
     //::::>
     public AdminRepository(Connection connection) throws SQLException {
         this.connection = connection;
-        String createTable = "CREATE TABL NOT EXISTS Admin(firstName varcha(5),lastName varchar(50),username varcar(50)not null, password varchar(50) )";
+        String createTable = "CREATE TABLE IF NOT EXISTS Admin(id SERIAL PRIMARY KEY, " +
+                "firstName VARCHAR(50),lastName VARCHAR(50)," +
+                "username VARCHAR(50) not null, password VARCHAR(50) )";
         PreparedStatement preparedStatement = connection.prepareStatement(createTable);
-        preparedStatement.execute();
+        preparedStatement.executeUpdate();
     }
 
     //::::>
     public int importAdmin(Admin admin) throws SQLException {
-        String importValue = "INSERT Admin(firstName,lastName,username) VALUES (?, ?, ?)";
+        String importValue = "INSERT Admin(firstName,lastName,username,password) VALUES (?, ?, ?, ?)";
         PreparedStatement preparedStatement = connection.prepareStatement(importValue);
         preparedStatement.setString(1,admin.firstName);
         preparedStatement.setString(2,admin.lastName);
         preparedStatement.setString(3,admin.username);
-        preparedStatement.setString(5,admin.password);
-        return preparedStatement.execute();
+        preparedStatement.setString(4,admin.password);
+        return preparedStatement.executeUpdate();
     }
 
     //::::>
     public String findAdmin(String username,String password) throws SQLException {
-        String findQuery = "SELECT * FROM Admin WHERE uername = ? AND pass = ? ";
+        String findQuery = "SELECT * FROM Admin WHERE username = ? AND password = ? ";
         PreparedStatement preparedStatement = connection.prepareStatement(findQuery);
         preparedStatement.setString(1,username);
         preparedStatement.setString(2,password);
