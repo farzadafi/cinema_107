@@ -1,6 +1,6 @@
 package org.cinema;
 
-class person {
+public class Person {
     protected String firstName;
     protected String lastName;
     protected String username;

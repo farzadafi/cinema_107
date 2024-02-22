@@ -1,16 +1,18 @@
-package org.cinea;
+package org.cinema;
 
-public class admin extends Perso {
+import org.cinema.Person;
 
-    private Admin(String FirstName,String stName,String username,String passwrd){
-        this.firstName = FirstName;
-        this.lastName = stName;
+public class Admin extends Person {
+
+    public Admin(String firstName,String lastName,String username,String password){
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.username = username;
         this.password = password;
     }
 
 
-    private Admin(){
+    public Admin(){
 
     }
 

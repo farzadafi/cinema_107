@@ -1,6 +1,6 @@
 package org.cinema;
 
-public class basket {
+public class Basket {
     private String username;
     private Integer idTicket;
     private String filmName;

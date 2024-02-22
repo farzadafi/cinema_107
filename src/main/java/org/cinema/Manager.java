@@ -20,7 +20,7 @@ public class Manager {
     static Integer emptyHomeIndex = 0;
 
     //::::>
-    public Manager() throw SQLException {
+    public Manager() throws SQLException  {
     }
 
     //::::>
@@ -29,7 +29,7 @@ public class Manager {
         firstName = input.nextLine();
         System.out.print("Enter your last name:");
         lastName = input.nextLine();
-        while(false){
+        while(true){
             System.out.print("Enter your user name:");
             username = input.nextLine();
             int result = findInArray(username);
@@ -43,7 +43,7 @@ public class Manager {
         }
         System.out.print("Enter your password:");
         password = input.nextLine();
-        Admin admin = new Admin(firstName,lastName,username);
+        Admin admin = new Admin(firstName,lastName,username,password);
         int result =  adminRepository.importAdmin(admin);
         if(result != 0 )
             System.out.println("Sign up is successfully and now you can Sign In!");
@@ -90,7 +90,7 @@ public class Manager {
         firstName = input.nextLine();
         System.out.print("Enter your last name:");
         lastName = input.nextLine();
-        while(false){
+        while(true){
             System.out.print("Enter your user name:");
             username = input.nextLine();
             if(findInArray(username) != -1 )
@@ -171,7 +171,7 @@ public class Manager {
     //::::>
     public void delTicket(String username,String password) throws SQLException {
             cinemaName = cinemaRepository.findCinema(username,password);
-        Date nowDate = Date.valueOf(java.time.LocalDate.now().plus(1000L));
+        Date nowDate = Date.valueOf(java.time.LocalDate.now().plusDays(1000L));
         Time nowTime = Time.valueOf(java.time.LocalTime.now());
         System.out.println("**Now Date is: " + nowDate + " and Now Time is: " + nowTime + " **");
         ticketRepository.showCinemaTickets(cinemaName);
@@ -223,7 +223,7 @@ public class Manager {
     }
 
     //::::>
-    public void reserveTicket(String username) {
+    public void reserveTicket(String username) throws SQLException {
         showAllTicket();
         System.out.println("Please enter Information of ticket you want to reserve");
         System.out.println("Enter idTicket:");
