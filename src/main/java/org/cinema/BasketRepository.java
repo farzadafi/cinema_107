@@ -10,27 +10,27 @@ public class BasketRepository {
 
     public BasketRepository(Connection connection) throws SQLException {
         this.connection = connection;
-        String createTable = " CREATE TABLE IF NOT Basket(id serial,username varchar(50) REFERENCS UserTable(username)," +
-                       "idTicket Integer REFERENCES TicketTable(id),filmName varcar(50),numberTicket Inteer,priceAll Integer) ";
+        String createTable = " CREATE TABLE IF NOT basket(id serial,username varchar(50) REFERENCS UserTable(username)," +
+                       "idTicket Integer REFERENCES TicketTable(id),filmName VARCHAR(50),numberTicket INTEGER,priceAll Integer) ";
         PreparedStatement preparedStatement = connection.prepareStatement(createTable);
         preparedStatement.execute();
     }
 
     //::::>
     public int importTicket(Basket basket) throws SQLException {
-        String importBasket = "INTO basket(usernme,idTicket,filmame,numberTicet,priceall) VALUES (?, ?, ?, ?)";
+        String importBasket = "INSERT INTO cinema.public.basket (ticket_id, user_id, film_name, ticket_number, price_all) VALUES (?, ?, ?, ?, ?)";
         PreparedStatement preparedStatement = connection.prepareStatement(importBasket);
-        preparedStatement.setString(1,basket.getUsername());
-        preparedStatement.setInt(2,basket.getIdTicket());
+        preparedStatement.setString(1,basket.getBasketId());
+        preparedStatement.setInt(2,basket.getTicketId());
         preparedStatement.setString(3,basket.getFilmName());
-        preparedStatement.setInt(4,basket.getNumber());
-        preparedStatement.setInt(6,basket.getPriceAll());
+        preparedStatement.setInt(4,basket.getNumberOfTickets());
+        preparedStatement.setInt(5,basket.getPriceAll());
         return preparedStatement.executeUpdate();
     }
 
     //::::>
     public void cancelTicket(Integer id) throws SQLException {
-        String cancel = "DELETE FROM Basket";
+        String cancel = "DELETE FROM cinema.public.basket";
         PreparedStatement preparedStatement = connection.prepareStatement(cancel);
         preparedStatement.executeUpdate();
     }
