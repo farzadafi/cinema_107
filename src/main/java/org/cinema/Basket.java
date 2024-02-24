@@ -11,9 +11,9 @@ import lombok.experimental.FieldDefaults;
 @ToString
 
 public class Basket {
-     String username;
-     Integer idTicket;
+     String basketId;
+     Integer ticketId;
      String filmName;
-     Integer number;
+     Integer numberOfTickets;
      Integer priceAll;
 }
