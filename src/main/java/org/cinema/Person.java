@@ -1,10 +1,19 @@
 package org.cinema;
 
-public class Person {
-    protected String firstName;
-    protected String lastName;
-    protected String username;
-    protected String password;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@FieldDefaults(level = AccessLevel.PROTECTED)
+@ToString
+
+public class Person {
+     String firstName;
+     String lastName;
+     String username;
+     String password;
 
 }
