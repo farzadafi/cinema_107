@@ -31,7 +31,7 @@ public class Basket {
         return number;
     }
 
-    public Integer getPriceAll()
+    public Integer getPriceAll(){
         return priceAll;
     }
 }
