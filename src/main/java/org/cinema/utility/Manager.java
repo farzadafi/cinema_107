@@ -1,11 +1,22 @@
-package org.cinema;
+package org.cinema.utility;
+import org.cinema.model.*;
+import org.cinema.repository.*;
+
 import java.sql.*;
 import java.sql.Date;
-import java.time.temporal.TemporalAmount;
 import java.util.*;
 
 public class Manager {
-    Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres" , "postgres" , "shlgham");
+    Connection connection;
+
+    {
+        try {
+            connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres" , "postgres" , "maede.123");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     UserRepository userRepository = new UserRepository(connection);
     AdminRepository adminRepository = new AdminRepository(connection);
     CinemaRepository cinemaRepository = new CinemaRepository(connection);
@@ -20,11 +31,11 @@ public class Manager {
     static Integer emptyHomeIndex = 0;
 
     //::::>
-    public Manager() throws SQLException  {
+    public Manager(){
     }
 
     //::::>
-    public void registerAdmin() throws SQLException {
+    public void registerAdmin(){
         System.out.print("Please enter your first name:");
         firstName = input.nextLine();
         System.out.print("Enter your last name:");
@@ -33,7 +44,7 @@ public class Manager {
             System.out.print("Enter your user name:");
             username = input.nextLine();
             int result = findInArray(username);
-            if(result != -1 )
+            if(result != -2 )
                 System.out.println("this user name is defined before,select another username");
             else{
                 usernameArray[emptyHomeIndex] = username;
@@ -43,7 +54,7 @@ public class Manager {
         }
         System.out.print("Enter your password:");
         password = input.nextLine();
-        Admin admin = new Admin(firstName,lastName,username,password);
+        Admin admin = new Admin(firstName, lastName, username, password);
         int result =  adminRepository.importAdmin(admin);
         if(result != 0 )
             System.out.println("Sign up is successfully and now you can Sign In!");
@@ -52,7 +63,7 @@ public class Manager {
     }
 
     //::::>
-    public void registerCinema() throws SQLException {
+    public void registerCinema(){
         while(true)
         {
             System.out.print("Please enter your Cinema name:");
@@ -67,7 +78,7 @@ public class Manager {
         while(true) {
             System.out.print("Enter your user name:");
             username = input.nextLine();
-            if( findInArray(username) != -1 )
+            if( findInArray(username) != -2 )
                 System.out.println("this user name is defined before,select another username");
             else{
                 usernameArray[emptyHomeIndex] = username;
@@ -85,7 +96,7 @@ public class Manager {
     }
 
     //::::>
-    public void registerUser() throws SQLException {
+    public void registerUser() {
         System.out.print("Please enter your first name:");
         firstName = input.nextLine();
         System.out.print("Enter your last name:");
@@ -93,7 +104,7 @@ public class Manager {
         while(true){
             System.out.print("Enter your user name:");
             username = input.nextLine();
-            if(findInArray(username) != -1 )
+            if(findInArray(username) == -1 )
                 System.out.println("this user name is defined before,select another username");
             else{
                 usernameArray[emptyHomeIndex] = username;
@@ -115,11 +126,12 @@ public class Manager {
         for(int i=0;i<emptyHomeIndex;i++)
             if(usernameArray[i].equals(username))
                 return i;
-            return -2;
+
+        return -2;
     }
 
     //::::>
-    public int selectMenu(String username,String password) throws SQLException {
+    public int selectMenu(String username,String password) {
         if(adminRepository.findAdmin(username,password) != null )
             return 1;
         else if(cinemaRepository.findCinema(username,password) != null)
@@ -131,9 +143,9 @@ public class Manager {
     }
 
     //::::>
-    public void confirmCinema() throws SQLException {
-        System.out.println("list of unConfirm cinema are:");
-        cinemaRepository.showUnconfirmCinema();
+    public void confirmCinema() {
+        System.out.println("list of unConfirmed cinemas are:");
+        cinemaRepository.showUnconfirmedCinema();
         System.out.println("That's All!");
         System.out.print("Please enter name of cinema you want to confirm:");
         input1 = input.nextLine();
@@ -145,12 +157,12 @@ public class Manager {
     }
 
     //::::>
-    public void addTicket(String username,String password) throws SQLException {
+    public void addTicket(String username,String password) {
             cinemaName = cinemaRepository.findCinema(username,password);
         System.out.println("please enter Information of Ticket for add!");
         System.out.print("Enter film name: ");
         filmName = input.nextLine();
-        System.out.print("Enter date(yyyy-dd-mm):");
+        System.out.print("Enter date(yyyy-mm-dd):");
         timeDate = input.nextLine();
         Date timeD = Date.valueOf(timeDate);
         System.out.print("Enter time(HH:MM:SS):");
@@ -169,9 +181,9 @@ public class Manager {
     }
 
     //::::>
-    public void delTicket(String username,String password) throws SQLException {
+    public void delTicket(String username,String password) {
             cinemaName = cinemaRepository.findCinema(username,password);
-        Date nowDate = Date.valueOf(java.time.LocalDate.now().plusDays(1000L));
+        Date nowDate = Date.valueOf(java.time.LocalDate.now());
         Time nowTime = Time.valueOf(java.time.LocalTime.now());
         System.out.println("**Now Date is: " + nowDate + " and Now Time is: " + nowTime + " **");
         ticketRepository.showCinemaTickets(cinemaName);
@@ -208,22 +220,22 @@ public class Manager {
     }
 
     //::::>
-    public void showAllTicket() throws SQLException {
+    public void showAllTicket() {
         ticketRepository.showAllTicket();
     }
 
     //::::>
-    public void searchFilm() throws SQLException {
+    public void searchFilm() {
         System.out.print("Please enter film name:");
         input1 = input.nextLine();
-        System.out.print("Please enter film date(yyyy-dd-mm):");
+        System.out.print("Please enter film date(yyyy-mm-dd):");
         timeDate = input.nextLine();
         Date timeD = Date.valueOf(timeDate);
         ticketRepository.searchWithName(input1,timeD);
     }
 
     //::::>
-    public void reserveTicket(String username) throws SQLException {
+    public void reserveTicket(String username) {
         showAllTicket();
         System.out.println("Please enter Information of ticket you want to reserve");
         System.out.println("Enter idTicket:");
@@ -255,7 +267,7 @@ public class Manager {
     }
 
     //::::>
-    public void viewMyBasket(String username) throws SQLException {
+    public void viewMyBasket(String username) {
         basketRepository.viewMyBasket(username);
     }
 
@@ -293,20 +305,18 @@ public class Manager {
     }
 
     //::::>
-    public void listHighPurchase(String username,String password) throws SQLException {
+    public void listHighPurchase(String username,String password) {
         cinemaName = cinemaRepository.findCinema(username,password);
         ticketRepository.showListHighPurchase(cinemaName);
     }
 
     //::::>
-    public int isConfirm(String username,String password) throws SQLException {
+    public int isConfirm(String username,String password) {
         cinemaName = cinemaRepository.findCinema(username,password);
         if(cinemaRepository.isConfirm(cinemaName) == 0 )
             return 0;
 
         return 1;
     }
-
-
 
 }

@@ -1,6 +1,6 @@
 
-package org.cinema;
-import java.sql.SQLException;
+package org.cinema.utility;
+
 import java.util.*;
 
 public class Menu {
@@ -9,11 +9,11 @@ public class Menu {
     String input1,input2;
     Scanner input = new Scanner(System.in);
 
-    public Menu() throws SQLException {
+    public Menu() {
     }
 
     //:::::>
-    public int publicMenu() throws SQLException {
+    public int publicMenu(){
         System.out.println("**********WELCOME**********");
         System.out.println("1-Sign in(Enter).");
         System.out.println("2-Sign up(Register).");
@@ -38,7 +38,7 @@ public class Menu {
     }
 
     //:::::>
-    public void RegisterMenu() throws SQLException {
+    public void RegisterMenu() {
         System.out.println("Who are you?");
         System.out.println("1-Admin.");
         System.out.println("2-Cinema.");
@@ -64,7 +64,7 @@ public class Menu {
     }
 
     //:::::>
-    public void enterMenu() throws SQLException {
+    public void enterMenu() {
         System.out.print("Please enter your user name:");
         input1 = input.nextLine();
         if (manager.findInArray(input1) == -1) {
