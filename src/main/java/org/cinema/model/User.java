@@ -10,19 +10,4 @@ public class User extends Person {
         this.password = password;
     }
 
-    public String getFirstName(){
-        return firstName;
-    }
-
-    public String getLastName(){
-        return lastName;
-    }
-
-    public String getUsername(){
-        return username;
-    }
-
-    public String getPassword(){
-        return password;
-    }
 }
