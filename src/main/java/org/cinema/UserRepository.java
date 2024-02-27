@@ -10,12 +10,18 @@ public class UserRepository {
 
 
     //::::>
-   public UserRepository(Connection connectionn) throws SQLException {
-       connection = connectionn;
-       String create = "CREATE TABLE IF NOT EXISTS UserTable (firstName varchar(50),lastName varchar(50),username varchar(50)PRIMARY KEY,password varchar(50) ) ";
-       PreparedStatement far = connection.prepareStatement(create);
-       far.execute();
-   }
+    public UserRepository(Connection connection) throws SQLException {
+        this.connection = connection;
+        String create = "CREATE TABLE IF NOT EXISTS user_table\n" +
+                "(\n" +
+                "    first_name VARCHAR(50),\n" +
+                "    last_name  VARCHAR(50),\n" +
+                "    username   VARCHAR(50) PRIMARY KEY,\n" +
+                "    password   VARCHAR(50)\n" +
+                ")";
+        PreparedStatement ps = connection.prepareStatement(create);
+        ps.executeUpdate();
+    }
 
     //::::>
     public int importUser(User user) throws SQLException {
