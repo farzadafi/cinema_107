@@ -1,4 +1,4 @@
-package org.cinema;
+package org.cinema.model;
 
 public class Person {
     protected String firstName;

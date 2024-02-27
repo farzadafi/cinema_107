@@ -1,6 +1,4 @@
-package org.cinema;
-
-import org.cinema.Person;
+package org.cinema.model;
 
 public class Admin extends Person {
 

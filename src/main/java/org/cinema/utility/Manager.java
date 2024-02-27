@@ -1,7 +1,9 @@
-package org.cinema;
+package org.cinema.utility;
+import org.cinema.model.*;
+import org.cinema.repository.*;
+
 import java.sql.*;
 import java.sql.Date;
-import java.time.temporal.TemporalAmount;
 import java.util.*;
 
 public class Manager {

@@ -1,4 +1,6 @@
-package org.cinema;
+package org.cinema.repository;
+
+import org.cinema.model.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

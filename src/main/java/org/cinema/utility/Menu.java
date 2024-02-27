@@ -1,5 +1,6 @@
 
-package org.cinema;
+package org.cinema.utility;
+
 import java.sql.SQLException;
 import java.util.*;
 

@@ -1,6 +1,6 @@
-package org.cinema;
+package org.cinema.model;
 
-public class User extends Person{
+public class User extends Person {
 
     //::::>
     public User(String firstName,String lastName,String username,String password){

@@ -1,11 +1,11 @@
-package org.cinema;
+package org.cinema.model;
 
 public class Basket {
-    private String username;
-    private Integer idTicket;
-    private String filmName;
-    private Integer number;
-    private Integer priceAll;
+    private final String username;
+    private final Integer idTicket;
+    private final String filmName;
+    private final Integer number;
+    private final Integer priceAll;
 
     public Basket(String Username,Integer idTicket,String filmName,Integer number,Integer priceAll){
         this.username = Username;
@@ -31,7 +31,7 @@ public class Basket {
         return number;
     }
 
-    public Integer getPriceAll()
+    public Integer getPriceAll(){
         return priceAll;
     }
 }

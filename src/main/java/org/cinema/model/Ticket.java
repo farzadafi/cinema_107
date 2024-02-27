@@ -1,15 +1,15 @@
-package org.cinema;
+package org.cinema.model;
 
 import java.sql.Date;
 import java.sql.Time;
 
-class Ticket {
-    private String cinemaName;
-    private String filmName;
-    private Date datetime;
-    private Time clock;
-    private int numberTickets;
-    private int  price;
+public class Ticket {
+    private final String cinemaName;
+    private final String filmName;
+    private final Date datetime;
+    private final Time clock;
+    private final int numberTickets;
+    private final int  price;
 
     public Ticket(String cinemaName,String filmName,Date datetime,Time clock,int numberTickets,int price){
         this.cinemaName = cinemaName;
