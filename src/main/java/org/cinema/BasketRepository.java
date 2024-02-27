@@ -10,10 +10,17 @@ public class BasketRepository {
 
     public BasketRepository(Connection connection) throws SQLException {
         this.connection = connection;
-        String createTable = " CREATE TABLE IF NOT Basket(id serial,username varchar(50) REFERENCS UserTable(username)," +
-                       "idTicket Integer REFERENCES TicketTable(id),filmName varcar(50),numberTicket Inteer,priceAll Integer) ";
-        PreparedStatement preparedStatement = connection.prepareStatement(createTable);
-        preparedStatement.execute();
+        String createTable = "CREATE TABLE IF NOT EXISTS basket\n" +
+                "(\n" +
+                "    id            SERIAL PRIMARY KEY,\n" +
+                "    username      VARCHAR(50) REFERENCES user_table (username),\n" +
+                "    ticket_id     int REFERENCES ticket (id),\n" +
+                "    film_name     VARCHAR(50),\n" +
+                "    ticket_number int,\n" +
+                "    price_all     int\n" +
+                ")";
+        PreparedStatement ps = connection.prepareStatement(createTable);
+        ps.executeUpdate();
     }
 
     //::::>

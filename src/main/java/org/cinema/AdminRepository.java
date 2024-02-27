@@ -12,10 +12,14 @@ public class AdminRepository {
 
     //::::>
     public AdminRepository(Connection connection) throws SQLException {
-        this.connection = connection;
-        String createTable = "CREATE TABLE IF NOT EXISTS Admin(id SERIAL PRIMARY KEY, " +
-                "firstName VARCHAR(50),lastName VARCHAR(50)," +
-                "username VARCHAR(50) not null, password VARCHAR(50) )";
+        String createTable = "CREATE TABLE IF NOT EXISTS admin\n" +
+                "(\n" +
+                "    id         SERIAL PRIMARY KEY,\n" +
+                "    first_name VARCHAR(50),\n" +
+                "    last_name VARCHAR(50),\n" +
+                "    username VARCHAR(50) NOT NULL ,\n" +
+                "    password VARCHAR(50)\n" +
+                ")";
         PreparedStatement preparedStatement = connection.prepareStatement(createTable);
         preparedStatement.executeUpdate();
     }

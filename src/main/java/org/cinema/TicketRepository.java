@@ -10,10 +10,20 @@ public class TicketRepository {
     //::::>
     public TicketRepository(Connection connection) throws SQLException {
         this.connection = connection;
-        String createTable = "CREATE TABLE IF NOT EXISTS Ticket(id serial PRIMARY KEY,cinemaName varchar(50),filmName varchar(50),datetime date,clock time,numberTicket int,price int,numberBuy int " +
-         ",CONSTRAINT fk_cinemaName FOREIGN KEY(cinemaName) REFERENCES Cinema (cinemaName))";
-        PreparedStatement preparedStatement = connection.prepareStatement(createTable);
-        preparedStatement.execute();
+        String createTable = "CREATE TABLE IF NOT EXISTS ticket\n" +
+                "(\n" +
+                "    id            SERIAL PRIMARY KEY,\n" +
+                "    cinema_name   varchar(50),\n" +
+                "    film_name     varchar(50),\n" +
+                "    datetime      date,\n" +
+                "    clock         time,\n" +
+                "    number_ticket int,\n" +
+                "    price         int,\n" +
+                "    number_buy    int,\n" +
+                "    CONSTRAINT fk_cinemaName FOREIGN KEY (cinema_name) REFERENCES cinema (cinema_name)\n" +
+                ")";
+        PreparedStatement ps = connection.prepareStatement(createTable);
+        ps.executeUpdate();
     }
 
     //::::>
