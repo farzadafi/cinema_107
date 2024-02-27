@@ -9,14 +9,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class AdminRepository {
-        private Connection connection;
+        private final Connection connection;
 
 
     //::::>
     public AdminRepository(Connection connection) throws SQLException {
         this.connection = connection;
-        String createTable = "CREATE TABLE IF NOT EXISTS Admin(id SERIAL PRIMARY KEY, " +
-                "firstName VARCHAR(50),lastName VARCHAR(50)," +
+        String createTable = "CREATE TABLE IF NOT EXISTS admin(id SERIAL PRIMARY KEY, " +
+                "first_name VARCHAR(50),last_name VARCHAR(50)," +
                 "username VARCHAR(50) not null, password VARCHAR(50) )";
         PreparedStatement preparedStatement = connection.prepareStatement(createTable);
         preparedStatement.executeUpdate();
@@ -24,12 +24,12 @@ public class AdminRepository {
 
     //::::>
     public int importAdmin(Admin admin) throws SQLException {
-        String importValue = "INSERT Admin(firstName,lastName,username,password) VALUES (?, ?, ?, ?)";
+        String importValue = "INSERT INTO Admin(first_name,last_name,username,password) VALUES (?, ?, ?, ?)";
         PreparedStatement preparedStatement = connection.prepareStatement(importValue);
-        preparedStatement.setString(1,admin.firstName);
-        preparedStatement.setString(2,admin.lastName);
-        preparedStatement.setString(3,admin.username);
-        preparedStatement.setString(4,admin.password);
+        preparedStatement.setString(1,admin.getFirstName());
+        preparedStatement.setString(2,admin.getLastName());
+        preparedStatement.setString(3,admin.getUsername());
+        preparedStatement.setString(4,admin.getPassword());
         return preparedStatement.executeUpdate();
     }
 
