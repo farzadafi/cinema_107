@@ -13,9 +13,16 @@ public class CinemaRepository {
     //::::>
     public CinemaRepository(Connection connection) throws SQLException {
         this.connection = connection;
-        String createTable = "CREATE TABLE IF NOT EXISTS cinema (cinemaName VARCHAR(50)PRIMARY KEY,cinemaNumber VARCHAR(50),username VARCHAR(50),password VARCHAR(50),confirm INTEGER )";
-        PreparedStatement preparedStatement = connection.prepareStatement(createTable);
-        preparedStatement.execute();
+        String createTable = "CREATE TABLE IF NOT EXISTS cinema\n" +
+                "(\n" +
+                "    cinema_name VARCHAR(50) PRIMARY KEY ,\n" +
+                "    cinema_number VARCHAR(50),\n" +
+                "    username VARCHAR(50),\n" +
+                "    password VARCHAR(50),\n" +
+                "    confirm int\n" +
+                ")";
+        PreparedStatement ps = connection.prepareStatement(createTable);
+        ps.executeUpdate();
     }
 
     //::::>
