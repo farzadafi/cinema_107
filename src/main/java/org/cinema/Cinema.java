@@ -1,10 +1,10 @@
-package org.cinema.model;
+package org.cinema;
 
 public class Cinema {
-    private final String cinemaName;
-    private final String cinemaNumber;
-    private final String username;
-    private final String password;
+    private String cinemaName;
+    private String cinemaNumber;
+    private String username;
+    private String password;
     private int confirm;
 
     public Cinema(String cinemaName,String cinemaNumber,String username,String password){
