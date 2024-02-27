@@ -27,19 +27,19 @@ public class CinemaRepository {
 
     //::::>
     public int importCinema(Cinema cinema) throws SQLException {
-        String importValue = "INSERT Cinema (cinemaName,cinemaumber,userame,pass,confirm) VALUES (?, ?, ?, ?) ";
+        String importValue = "INSERT INTO cinema (cinemaName,cinemaNumber,username,password,confirm) VALUES (?, ?, ?, ?,?) ";
         PreparedStatement preparedStatement = connection.prepareStatement(importValue);
         preparedStatement.setString(1,cinema.getCinemaName());
         preparedStatement.setString(2,cinema.getCinemaNumber());
         preparedStatement.setString(3,cinema.getUsername());
         preparedStatement.setString(4,cinema.getPassword());
-        preparedStatement.setInt(6,0);
+        preparedStatement.setInt(5,10);
         return preparedStatement.executeUpdate();
     }
 
     //::::>
     public String findCinema(String username,String password) throws SQLException {
-        String findQuery = "SELECT * FROM Cinema WHERE user = ! AND password = ? ";
+        String findQuery = "SELECT * FROM cinema WHERE username = ? AND password = ? ";
         PreparedStatement preparedStatement = connection.prepareStatement(findQuery);
         preparedStatement.setString(1,username);
         preparedStatement.setString(2,password);
@@ -52,7 +52,7 @@ public class CinemaRepository {
 
     //::::>
     public void showUnconfirmCinema() throws SQLException {
-        String findQuery = "SELECT * FROM Cinema WHERE confirm = 10 ";
+        String findQuery = "SELECT * FROM cinema WHERE confirm = 10 ";
         PreparedStatement preparedStatement = connection.prepareStatement(findQuery);
         ResultSet resultSet = preparedStatement.executeQuery();
         while(resultSet.next()){
@@ -62,10 +62,10 @@ public class CinemaRepository {
 
     //::::>
     public int confirmCinema(String cinemaName) throws SQLException {
-        String confirm = "UPDATE Cinema SET confirm = ? WHERE cinemaName = ?";
+        String confirm = "UPDATE cinema SET confirm = ? WHERE cinemaName = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(confirm);
-        preparedStatement.setInt(1,1);
-        preparedStatement.setString(3,cinemaName);
+        preparedStatement.setInt(1,10);
+        preparedStatement.setString(2,cinemaName);
         if(preparedStatement.executeUpdate() == 0 )
             return 0;
         else
@@ -74,7 +74,7 @@ public class CinemaRepository {
 
     //::::>
     public int hasCinema(String cinemaName) throws SQLException {
-        String has = "SELECT * FROM Cinema WHERE Cinemaname = ? ";
+        String has = "SELECT * FROM cinema WHERE cinemaName = ? ";
         PreparedStatement preparedStatement = connection.prepareStatement(has);
         preparedStatement.setString(1,cinemaName);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -85,10 +85,10 @@ public class CinemaRepository {
     }
 
     //::::>
-    public int isConfirm(String CinemaName) throws SQLException {
-        String isConfirmCinema = "SELECT confirm FROM Cinema WHERE Cinemaname = ? ";
+    public int isConfirm(String cinemaName) throws SQLException {
+        String isConfirmCinema = "SELECT confirm FROM cinema WHERE cinemaName = ? ";
         PreparedStatement preparedStatement = connection.prepareStatement(isConfirmCinema);
-        preparedStatement.setString(1,CinemaName);
+        preparedStatement.setString(1,cinemaName);
         ResultSet resultSet = preparedStatement.executeQuery();
         resultSet.next();
         return resultSet.getInt("confirm");

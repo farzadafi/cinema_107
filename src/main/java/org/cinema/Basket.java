@@ -9,7 +9,6 @@ import lombok.experimental.FieldDefaults;
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @ToString
-
 public class Basket {
      String basketId;
      Integer ticketId;
