@@ -1,6 +1,6 @@
-//In the name of God!
+package org.cinema;//In the name of God!
 
-package or.cinema;
+import org.cinema.Menu;
 
 import java.sql.*;
 import java.time.Instant;

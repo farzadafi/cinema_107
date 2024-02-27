@@ -10,6 +10,7 @@ public class BasketRepository {
 
     public BasketRepository(Connection connection) throws SQLException {
         this.connection = connection;
+
         String createTable = "CREATE TABLE IF NOT EXISTS basket\n" +
                 "(\n" +
                 "    id            SERIAL PRIMARY KEY,\n" +
@@ -19,25 +20,25 @@ public class BasketRepository {
                 "    ticket_number int,\n" +
                 "    price_all     int\n" +
                 ")";
-        PreparedStatement ps = connection.prepareStatement(createTable);
-        ps.executeUpdate();
+        PreparedStatement preparedStatement = connection.prepareStatement(createTable);
+        preparedStatement.executeUpdate();
     }
 
     //::::>
     public int importTicket(Basket basket) throws SQLException {
-        String importBasket = "INTO basket(usernme,idTicket,filmame,numberTicet,priceall) VALUES (?, ?, ?, ?)";
+        String importBasket = "INSERT INTO cinema.public.basket (ticket_id, user_id, film_name, ticket_number, price_all) VALUES (?, ?, ?, ?, ?)";
         PreparedStatement preparedStatement = connection.prepareStatement(importBasket);
-        preparedStatement.setString(1,basket.getUsername());
-        preparedStatement.setInt(2,basket.getIdTicket());
+        preparedStatement.setString(1,basket.getBasketId());
+        preparedStatement.setInt(2,basket.getTicketId());
         preparedStatement.setString(3,basket.getFilmName());
-        preparedStatement.setInt(4,basket.getNumber());
-        preparedStatement.setInt(6,basket.getPriceAll());
+        preparedStatement.setInt(4,basket.getNumberOfTickets());
+        preparedStatement.setInt(5,basket.getPriceAll());
         return preparedStatement.executeUpdate();
     }
 
     //::::>
     public void cancelTicket(Integer id) throws SQLException {
-        String cancel = "DELETE FROM Basket";
+        String cancel = "DELETE FROM cinema.public.basket";
         PreparedStatement preparedStatement = connection.prepareStatement(cancel);
         preparedStatement.executeUpdate();
     }
