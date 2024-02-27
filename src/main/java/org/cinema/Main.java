@@ -1,13 +1,15 @@
 //In the name of God!
 
-package or.cinema;
+package org.cinema;
 
-import java.sql.*;
-import java.time.Instant;
+
+import org.cinema.utility.Menu;
+
+import java.sql.SQLException;
 
 public class Main {
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        Class.forName("org.ostgresql.river");
+    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+        Class.forName("org.cinema.Main");
         Menu menu = new Menu();
 
         while(true)

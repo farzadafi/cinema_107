@@ -68,7 +68,7 @@ public class Menu {
     public void enterMenu() throws SQLException {
         System.out.print("Please enter your user name:");
         input1 = input.nextLine();
-        if (manager.findInArray(input1) == -1) {
+        if (manager.findInArray(input1) != -1) {
             System.out.println("this user name is not found!,please sign up and try again!");
             return;
         }
