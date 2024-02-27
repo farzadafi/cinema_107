@@ -7,7 +7,7 @@ import java.sql.Date;
 import java.util.*;
 
 public class Manager {
-    Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres" , "postgres" , "shlgham");
+    Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres" , "postgres" , "maede.123");
     UserRepository userRepository = new UserRepository(connection);
     AdminRepository adminRepository = new AdminRepository(connection);
     CinemaRepository cinemaRepository = new CinemaRepository(connection);
@@ -117,7 +117,8 @@ public class Manager {
         for(int i=0;i<emptyHomeIndex;i++)
             if(usernameArray[i].equals(username))
                 return i;
-            return -2;
+
+        return -1;
     }
 
     //::::>
@@ -152,7 +153,7 @@ public class Manager {
         System.out.println("please enter Information of Ticket for add!");
         System.out.print("Enter film name: ");
         filmName = input.nextLine();
-        System.out.print("Enter date(yyyy-dd-mm):");
+        System.out.print("Enter date(yyyy-mm-dd):");
         timeDate = input.nextLine();
         Date timeD = Date.valueOf(timeDate);
         System.out.print("Enter time(HH:MM:SS):");
@@ -173,7 +174,7 @@ public class Manager {
     //::::>
     public void delTicket(String username,String password) throws SQLException {
             cinemaName = cinemaRepository.findCinema(username,password);
-        Date nowDate = Date.valueOf(java.time.LocalDate.now().plusDays(1000L));
+        Date nowDate = Date.valueOf(java.time.LocalDate.now());
         Time nowTime = Time.valueOf(java.time.LocalTime.now());
         System.out.println("**Now Date is: " + nowDate + " and Now Time is: " + nowTime + " **");
         ticketRepository.showCinemaTickets(cinemaName);
@@ -218,7 +219,7 @@ public class Manager {
     public void searchFilm() throws SQLException {
         System.out.print("Please enter film name:");
         input1 = input.nextLine();
-        System.out.print("Please enter film date(yyyy-dd-mm):");
+        System.out.print("Please enter film date(yyyy-mm-dd):");
         timeDate = input.nextLine();
         Date timeD = Date.valueOf(timeDate);
         ticketRepository.searchWithName(input1,timeD);
