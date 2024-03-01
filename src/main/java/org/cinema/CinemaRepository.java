@@ -52,7 +52,7 @@ public class CinemaRepository {
 
     //::::>
     public void showUnconfirmCinema() throws SQLException {
-        String findQuery = "SELECT * FROM cinema WHERE confirm = 10 ";
+        String findQuery = "SELECT * FROM cinema WHERE confirm = 0 ";
         PreparedStatement preparedStatement = connection.prepareStatement(findQuery);
         ResultSet resultSet = preparedStatement.executeQuery();
         while(resultSet.next()){
