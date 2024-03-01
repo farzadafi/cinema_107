@@ -25,7 +25,7 @@ public class UserRepository {
 
     //::::>
     public int importUser(User user) throws SQLException {
-        String importValue = "INSERT INTO usertable (username,password) VALUES (?, ?)";
+        String importValue = "INSERT INTO usertable (firstName,lastName,username,password) VALUES (? ,? ,?, ?)";
         PreparedStatement preparedStatement = connection.prepareStatement(importValue);
         preparedStatement.setString(1,user.firstName);
         preparedStatement.setString(2,user.lastName);
