@@ -64,7 +64,7 @@ public class CinemaRepository {
     public int confirmCinema(String cinemaName) throws SQLException {
         String confirm = "UPDATE cinema SET confirm = ? WHERE cinemaName = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(confirm);
-        preparedStatement.setInt(1,10);
+        preparedStatement.setInt(1,1);
         preparedStatement.setString(2,cinemaName);
         if(preparedStatement.executeUpdate() == 0 )
             return 0;
