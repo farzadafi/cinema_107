@@ -54,7 +54,7 @@ public class TicketRepository {
 
     //::::>
     public void delTicket(Integer id) throws SQLException {
-        String del = "DELETE FROM TicKetTable";
+        String del = "DELETE FROM TicKetTable WHERE id=?";
         PreparedStatement preparedStatement = connection.prepareStatement(del);
         preparedStatement.setInt(1,id);
         preparedStatement.executeUpdate();
