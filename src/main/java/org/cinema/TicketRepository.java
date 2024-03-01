@@ -129,7 +129,7 @@ public class TicketRepository {
 
     //::::>
     public int updateNumberOfTicket(int id,Integer number) throws SQLException {
-        String updateNumberTicket = "UPDATE TicketTable SET numberTicket = ?";
+        String updateNumberTicket = "UPDATE TicketTable SET numberTicket = ? WHERE id=?";
         PreparedStatement preparedStatement = connection.prepareStatement(updateNumberTicket);
         preparedStatement.setInt(1,number);
         preparedStatement.setInt(2,id);
