@@ -54,7 +54,7 @@ public class TicketRepository {
 
     //::::>
     public void delTicket(Integer id) throws SQLException {
-        String del = "DELETE FROM TicKetTable";
+        String del = "DELETE FROM TicKetTable WHERE id=?";
         PreparedStatement preparedStatement = connection.prepareStatement(del);
         preparedStatement.setInt(1,id);
         preparedStatement.executeUpdate();
@@ -129,7 +129,7 @@ public class TicketRepository {
 
     //::::>
     public int updateNumberOfTicket(int id,Integer number) throws SQLException {
-        String updateNumberTicket = "UPDATE TicketTable SET numberTicket = ?";
+        String updateNumberTicket = "UPDATE TicketTable SET numberTicket = ? WHERE id=?";
         PreparedStatement preparedStatement = connection.prepareStatement(updateNumberTicket);
         preparedStatement.setInt(1,number);
         preparedStatement.setInt(2,id);
